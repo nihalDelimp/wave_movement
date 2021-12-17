@@ -233,7 +233,7 @@ var rename = function(obj, prefix) {
     return obj;
 };
 // for changing wake word remove "Alberta" and add whatever you want E.G.-"alexa"
-rename(commands, "Alexa ");
+rename(commands, "Line ");
 
 
 var size = Object.keys(commands).length;
@@ -243,7 +243,6 @@ var size = Object.keys(commands).length;
 
 user_said()
 if (annyang) {
-    console.log("Nihal", annyang)
     // Add our commands to annyang
     annyang.addCommands(commands);
 
