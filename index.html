@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Your description">
+    <meta name="author" content="Your name">
+    <meta property="og:site_name" content="" />
+    <meta property="og:site" content="" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Voice Assistant</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+    <link href="css/magnific-popup.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+        type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="./UI/button.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"
+        integrity="sha512-FRllqoDevM/yUYKzCe8K8qvyou3LAsBLSuKYvLSoAQLo70wWTSU6KSi110dXOpEIW8+ehByraYPC188htrPnjw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="icon" href="images/favicon.ico">
+
+
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+
+    <div class="action" style="top:50%;left:50%;transform:translate(-50%,-50%)" onclick="actionToogle()"> <span><img
+                src="./UI/buttonmic.ico" alt=""></span>
+    </div>
+    <div class="horizon-lines">
+        <!-- <div class="horizon-lines hidden" > -->
+        <div></div>
+    </div>
+</body>
+
+<script type="module" src="./main/main.js"></script>
+<script src="./main/script.js"></script>
+<script>
+    function actionToogle() {
+        var action = document.querySelector(".action");
+        action.classList.toggle("active",);
+        var wave = document.querySelector(".horizon-lines");
+        if (action.classList.contains("active")) {
+            console.log("starting...");
+            navigator.getUserMedia = navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia;
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia({
+                    audio: true
+                },
+                    function (stream) {
+                        console.log(stream,"stream")
+                        audioContext = new AudioContext();
+                        analyser = audioContext.createAnalyser();
+                        microphone = audioContext.createMediaStreamSource(stream);
+                        javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+                        analyser.smoothingTimeConstant = 0.8;
+                        analyser.fftSize = 1024;
+
+                        microphone.connect(analyser);
+                        analyser.connect(javascriptNode);
+                        javascriptNode.connect(audioContext.destination);
+                        javascriptNode.onaudioprocess = function () {
+                            var array = new Uint8Array(analyser.frequencyBinCount);
+                            analyser.getByteFrequencyData(array);
+                            var values = 0;
+
+                            var length = array.length;
+                            for (var i = 0; i < length; i++) {
+                                values += (array[i]);
+                            }
+
+                            var average = values / length;
+                            init(average)
+                        // console.log(average,"average")
+                        annyang.start();
+                        }
+                    },
+                    function (err) {
+                        console.log("The following error occured: " + err.name)
+                    });
+            }
+            else {
+                console.log("getUserMedia not supported");
+            }
+        }
+    }
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</html>

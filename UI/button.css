@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.action {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.action span {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7d6cfc;
+    font-size: 2rem;
+    transition: 0.3s ease-in-out;
+    border-radius: 50;
+    z-index: 200;
+}
+
+.action.active span {
+    transform: rotate(360deg);
+}
+
+.action ul {
+    position: absolute;
+    bottom: 55px;
+    background: #fff;
+    min-width: 250px;
+    border-radius: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.action.active ul {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    bottom: 65px;
+    opacity: 1;
+    visibility: visible;
+    transition: 0.3s;
+}
+
+.action ul li {
+    color: white;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0 10px 10px;
+    transition: 0.3s;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.action ul li:hover {
+    font-weight: 600;
+}
+
+.action ul li:not(:last-child) {
+    color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.action ul li img {
+    width: 15px;
+    margin-right: 10px;
+    opacity: 1;
+    transform: scale(0.8);
+}
+
+.action ul li:hover img {
+    opacity: 0.8;
+}
