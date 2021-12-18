@@ -26,7 +26,7 @@ particleImage.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAA
 //         function (callback) {
 //             window.setTimeout(callback, 1000 /60);
 //         };
-    
+
 // }();
 
 // Functions
@@ -35,7 +35,7 @@ function init(frequency) {
     canvas.width = screenW;
     canvas.height = screenH;
     // executeLoop(); loop
-    
+
     loop(frequency);
 }
 
@@ -49,12 +49,7 @@ function loop(frequency) {
     mouseVelY = mouseY - lastMouseY;
     lastMouseX = mouseX;
     lastMouseY = mouseY;
-    if(frequency<20){
-        makeParticle(0)
-    }
-    else{
-        makeParticle(frequency-5)
-    }
+    makeParticle(frequency)
     ctx.fillStyle = "rgba(0,0,0,0.9)";
     ctx.fillRect(0, 0, screenW, screenH);
     for (var i = 0, len = particles.length; i < len; i++) {
@@ -85,10 +80,15 @@ function loop(frequency) {
 function makeParticle(particleCount) {
     for (var i = 0; i < particleCount; i++) {
         var particle = new ImageParticle(particleImage, mouseX, mouseY);
-            particle.velX = randomRange(-5, 5) + (mouseVelX * 0.4);
-            particle.velY = randomRange(-5, 5) + (mouseVelY * 0.4);
-            particle.size = randomRange(2, 11);
-            particles.push(particle);
+        particle.velX = randomRange(-5, 0) + (mouseVelX * 0.4);
+        particle.velY = randomRange(-5, 5) + (mouseVelY * 0.4);
+        if (screenW > 768) {
+            particle.size = randomRange(1, 4);
+        }
+        else {
+            particle.size = randomRange(0, 2);
+        }
+        particles.push(particle);
     }
 }
 
@@ -97,22 +97,13 @@ function randomRange(min, max) {
 }
 
 function ImageParticle(img, posx, posy) {
-    if (screenW < 644) {
-        this.posX = randomRange(0, 644);
-        this.size = 0.1;
-    }
-    else {
-        this.posX = randomRange(0, screenW);
-        this.size = 0.3;
-
-    }
+    this.posX = randomRange(0, screenW);
     this.posY = screenH / 2 + 400;
     this.velX = 0;
     this.velY = 0;
     this.shrink = 0.96;
     this.maxSize = -1;
     this.shimmer = true;
-
     this.drag = 0.98;
     this.gravity = 0.2;
     this.alpha = 1;

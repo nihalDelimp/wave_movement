@@ -1,12 +1,57 @@
 // function for making alberta speak //
 export const speak = (word) => {
-    let utterance = new SpeechSynthesisUtterance(word);
-    const voicec = speechSynthesis.getVoices()
+    let utterance = new SpeechSynthesisUtterance();
+    utterance.lang="hi-IN"
+    //const voicec = speechSynthesis.getVoices()
+    //console.log( utterance,"voice")
     //change the number for voice changing
-    utterance.voice = voicec['2']
+    //utterance.voice = voicec['2']
+    //speechSynthesis.speak(utterance);
+
+    console.log( utterance,"voice")
+    // loop(word.length*5)
+    utterance.onstart = function(event) {
+        
+
+        let worddata = word.split(" ");
+        let startjob =0;
+        let intervaldt = setInterval(()=>{ 
+            makeParticle((worddata[startjob].length)+20);
+            //console.log("W W :",worddata.length,worddata[startjob])
+            startjob++;
+            if(startjob>=worddata.length) clearInterval(intervaldt);
+            
+
+        },150)
+        
+
+
+        // const voicec = speechSynthesis.getVoices()
+        //utterance.voice = speechSynthesis.getVoices()[7];
+        // console.log("Voice DAta",voicec);
+    };
+
+    utterance.onend=function(e){
+        console.log("End",e);
+        makeParticle(0);
+    }
+
+    utterance.onmark=function(e){
+        console.log("Mark",e);
+    }
+
+    utterance.onresume=function(e){
+        console.log("Resume",e);
+    }
+    utterance.onboundary=function(e){
+        console.log("On Boundary",e);
+    }
+
+    console.log("Input dAta",worddata)
+    utterance.text=word;
     speechSynthesis.speak(utterance);
-    loop(word.length*5)
-    utterance.onstart = function(event) {};
+
+
 }
 // function for displaying alberta's response on screen
 export const display = (word) => {
@@ -20,11 +65,24 @@ export const display = (word) => {
 
 export const user_said = () => {
     annyang.addCallback('resultMatch', function(userSaid, commandText, phrases) {
+        
+        //console.log("User : ",userSaid  )
+        //console.log("Command :",commandText)
         // document.getElementById('usersaid').innerHTML = '<img src="./UI/mic.ico"/>' + userSaid;
         // setTimeout(function() {
         //     document.getElementById('usersaid').innerHTML = '<img src="./UI/mic.ico"/> User Said';
         // }, 10000)
-    })
+    });
+
+    annyang.addCallback('resultNoMatch', function(userSaid) {
+        console.log("----User No Match : ",userSaid  )
+    });
+
+    annyang.addCallback('start', function(userSaid, commandText, phrases) {
+        console.log("----S User : ",userSaid  )
+        console.log("----S Command : ",commandText  )
+        console.log("----S phrases : ",phrases  )
+    });
 }
 //Function for picking random answer on conversation
 export const random = (first, second) => {

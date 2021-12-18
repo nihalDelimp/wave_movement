@@ -206,7 +206,7 @@ import {
     control
 } from '../command files/handsfree.js'
 
-let voicec = speechSynthesis.getVoices()
+//let voicec = speechSynthesis.getVoices()
 export const commands = { ...control,
     ...webopener,
     ...calculate,
@@ -236,15 +236,18 @@ var rename = function(obj, prefix) {
 rename(commands, "Line ");
 
 
-var size = Object.keys(commands).length;
+//var size = Object.keys(commands).length;
 
 
 // console.log(size)
 
-user_said()
+
 if (annyang) {
+    console.log(annyang)
     // Add our commands to annyang
     annyang.addCommands(commands);
+    user_said();
+    
 
     if (!annyang) {
         console.log("Speech Recognition is not supported");
