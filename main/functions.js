@@ -2,29 +2,29 @@
 let utterance = new SpeechSynthesisUtterance();
 // function for making alberta speak //
 export const speak = (word) => {
-    utterance.lang="en-US"
+    utterance.lang = "en-US"
     //const voicec = speechSynthesis.getVoices()
     //console.log( utterance,"voice")
     //change the number for voice changing
     //utterance.voice = voicec['2']
     //speechSynthesis.speak(utterance);
 
-    console.log( utterance,"voice")
+    console.log(utterance, "voice")
     // loop(word.length*5)
-    utterance.onstart = function(event) {
-        
+    utterance.onstart = function (event) {
+
 
         let worddata = word.split(" ");
-        let startjob =0;
-        let intervaldt = setInterval(()=>{ 
-            makeParticle((worddata[startjob].length)+20);
+        let startjob = 0;
+        let intervaldt = setInterval(() => {
+            makeParticle((worddata[startjob].length) + 20);
             //console.log("W W :",worddata.length,worddata[startjob])
             startjob++;
-            if(startjob>=worddata.length) clearInterval(intervaldt);
-            
+            if (startjob >= worddata.length) clearInterval(intervaldt);
 
-        },150)
-        
+
+        }, 150)
+
 
 
         // const voicec = speechSynthesis.getVoices()
@@ -32,23 +32,23 @@ export const speak = (word) => {
         // console.log("Voice DAta",voicec);
     };
 
-    utterance.onend=function(e){
-        console.log("End",e);
+    utterance.onend = function (e) {
+        console.log("End", e);
         makeParticle(0);
     }
 
-    utterance.onmark=function(e){
-        console.log("Mark",e);
+    utterance.onmark = function (e) {
+        console.log("Mark", e);
     }
 
-    utterance.onresume=function(e){
-        console.log("Resume",e);
+    utterance.onresume = function (e) {
+        console.log("Resume", e);
     }
-    utterance.onboundary=function(e){
-        console.log("On Boundary",e);
+    utterance.onboundary = function (e) {
+        console.log("On Boundary", e);
     }
 
-    utterance.text=word;
+    utterance.text = word;
     speechSynthesis.speak(utterance);
 
 
@@ -64,8 +64,8 @@ export const display = (word) => {
 // function for displaying user's's response on screen
 
 export const user_said = () => {
-    annyang.addCallback('resultMatch', function(userSaid, commandText, phrases) {
-        
+    annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
+
         //console.log("User : ",userSaid  )
         //console.log("Command :",commandText)
         // document.getElementById('usersaid').innerHTML = '<img src="./UI/mic.ico"/>' + userSaid;
@@ -74,38 +74,38 @@ export const user_said = () => {
         // }, 10000)
     });
 
-    annyang.addCallback('resultNoMatch', function(userSaid) {
+    annyang.addCallback('resultNoMatch', function (userSaid) {
         let firstTime = true;
         // let usersaid = userSaid.includes("line");
-            for (var j=0; j<userSaid.length; j++) {
-                if (userSaid[j].match("Line")){
-                    if(firstTime == true ){
+        for (var j = 0; j < userSaid.length; j++) {
+            if (userSaid[j].match("Line")) {
                         utterance.text = "Hey there, How are you?";
                         speechSynthesis.speak(utterance);
-                        firstTime=false;
                         break;
-                    }
-                }
             }
-        // console.log(usersaid,"nihal",userSaid)
-        // if(firstTime == true && usersaid== "line"){
-        //     utterance.text = "Hey there, How are you?";
-        //     speechSynthesis.speak(utterance);
-        //     console.log(usersaid,"users", userSaid);
-        //     firstTime=false;
-        // }
-        // else if(firstTime == true && usersaid!="line"){
-        //     utterance.text = "Say Line to get started";
-        //     speechSynthesis.speak(utterance)
-        // }
-        // else{
-        //     utterance.text = "Sorry I could not find that.";
-        //     speechSynthesis.speak(utterance);
-        // }
-        
+            else if(userSaid[j].match("I am good") || userSaid[j].match("I am fine")){
+                utterance.text = "I am also good, thankyou";
+                        speechSynthesis.speak(utterance);
+                        break;
+
+            }
+            else if(userSaid[j].match("I am good, How are you") || userSaid[j].match("I am fine, How are you")){
+                utterance.text = "I am also good, thankyou";
+                speechSynthesis.speak(utterance);
+                break;
+
+            }
+            else{
+                // utterance.text = "sorry! my bad";
+                // speechSynthesis.speak(utterance);
+                console.log("error")
+                break;
+            }
+        }
+
     });
 
-    annyang.addCallback('start', function(userSaid, commandText, phrases) {
+    annyang.addCallback('start', function (userSaid, commandText, phrases) {
         // console.log("----S User : ",userSaid  )
         // console.log("----S Command : ",commandText  )
         // console.log("----S phrases : ",phrases  )
