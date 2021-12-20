@@ -79,25 +79,27 @@ export const user_said = () => {
         // let usersaid = userSaid.includes("line");
         for (var j = 0; j < userSaid.length; j++) {
             if (userSaid[j].match("Alexa")) {
-                        utterance.text = "Hey there, How are you?";
-                        speechSynthesis.speak(utterance);
-                        break;
+                utterance.text = "Hey there, How are you?";
+                speechSynthesis.speak(utterance);
+                break;
             }
-            else if(userSaid[j].match("I am good") || userSaid[j].match("I am fine")){
-                utterance.text = "I am also good, thankyou";
-                        speechSynthesis.speak(utterance);
-                        break;
-
-            }
-            else if(userSaid[j].match("I am good, How are you") || userSaid[j].match("I am fine, How are you")){
+            else if (userSaid[j].match("I am good") || userSaid[j].match("I am fine")) {
                 utterance.text = "I am also good, thankyou";
                 speechSynthesis.speak(utterance);
+                annyang.removeCallback('resultNoMatch')
                 break;
 
             }
-            else{
-                // utterance.text = "sorry! my bad";
-                // speechSynthesis.speak(utterance);
+            else if (userSaid[j].match("I am good, How are you") || userSaid[j].match("I am fine, How are you")) {
+                utterance.text = "I am also good, thankyou";
+                speechSynthesis.speak(utterance);
+                annyang.removeCallback('resultNoMatch')
+                break;
+
+            }
+            else {
+                annyang.removeCallback('resultNoMatch')
+
                 console.log("error")
                 break;
             }
