@@ -98,8 +98,6 @@ export const user_said = () => {
 
             }
             else {
-                annyang.removeCallback('resultNoMatch')
-
                 console.log("error")
                 break;
             }
