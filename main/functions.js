@@ -1,7 +1,8 @@
+
+let utterance = new SpeechSynthesisUtterance();
 // function for making alberta speak //
 export const speak = (word) => {
-    let utterance = new SpeechSynthesisUtterance();
-    utterance.lang="hi-IN"
+    utterance.lang="en-US"
     //const voicec = speechSynthesis.getVoices()
     //console.log( utterance,"voice")
     //change the number for voice changing
@@ -47,7 +48,6 @@ export const speak = (word) => {
         console.log("On Boundary",e);
     }
 
-    console.log("Input dAta",worddata)
     utterance.text=word;
     speechSynthesis.speak(utterance);
 
@@ -75,13 +75,40 @@ export const user_said = () => {
     });
 
     annyang.addCallback('resultNoMatch', function(userSaid) {
-        console.log("----User No Match : ",userSaid  )
+        let firstTime = true;
+        // let usersaid = userSaid.includes("line");
+            for (var j=0; j<userSaid.length; j++) {
+                if (userSaid[j].match("Line")){
+                    if(firstTime == true ){
+                        utterance.text = "Hey there, How are you?";
+                        speechSynthesis.speak(utterance);
+                        firstTime=false;
+                        break;
+                    }
+                }
+            }
+        // console.log(usersaid,"nihal",userSaid)
+        // if(firstTime == true && usersaid== "line"){
+        //     utterance.text = "Hey there, How are you?";
+        //     speechSynthesis.speak(utterance);
+        //     console.log(usersaid,"users", userSaid);
+        //     firstTime=false;
+        // }
+        // else if(firstTime == true && usersaid!="line"){
+        //     utterance.text = "Say Line to get started";
+        //     speechSynthesis.speak(utterance)
+        // }
+        // else{
+        //     utterance.text = "Sorry I could not find that.";
+        //     speechSynthesis.speak(utterance);
+        // }
+        
     });
 
     annyang.addCallback('start', function(userSaid, commandText, phrases) {
-        console.log("----S User : ",userSaid  )
-        console.log("----S Command : ",commandText  )
-        console.log("----S phrases : ",phrases  )
+        // console.log("----S User : ",userSaid  )
+        // console.log("----S Command : ",commandText  )
+        // console.log("----S phrases : ",phrases  )
     });
 }
 //Function for picking random answer on conversation
