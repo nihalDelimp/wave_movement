@@ -78,7 +78,7 @@ export const user_said = () => {
         let firstTime = true;
         // let usersaid = userSaid.includes("line");
         for (var j = 0; j < userSaid.length; j++) {
-            if (userSaid[j].match("Line")) {
+            if (userSaid[j].match("Alexa")) {
                         utterance.text = "Hey there, How are you?";
                         speechSynthesis.speak(utterance);
                         break;

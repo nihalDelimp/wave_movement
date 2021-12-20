@@ -233,7 +233,7 @@ var rename = function(obj, prefix) {
     return obj;
 };
 // for changing wake word remove "Alberta" and add whatever you want E.G.-"alexa"
-rename(commands, "Line ");
+rename(commands, "Alexa ");
 
 
 //var size = Object.keys(commands).length;
