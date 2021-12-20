@@ -64,9 +64,14 @@ export const display = (word) => {
 // function for displaying user's's response on screen
 
 export const user_said = () => {
+    // if(user_said=="Alexa"){
+    //     console
+    //     annyang.addCallback('resultNoMatch')
+    // }
+
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
 
-        //console.log("User : ",userSaid  )
+        // console.log("User : ", userSaid)
         //console.log("Command :",commandText)
         // document.getElementById('usersaid').innerHTML = '<img src="./UI/mic.ico"/>' + userSaid;
         // setTimeout(function() {
@@ -74,41 +79,44 @@ export const user_said = () => {
         // }, 10000)
     });
 
-    annyang.addCallback('resultNoMatch', function (userSaid) {
-        let firstTime = true;
-        // let usersaid = userSaid.includes("line");
-        for (var j = 0; j < userSaid.length; j++) {
-            if (userSaid[j].match("Alexa")) {
-                utterance.text = "Hey there, How are you?";
-                speechSynthesis.speak(utterance);
-                break;
-            }
-            else if (userSaid[j].match("I am good") || userSaid[j].match("I am fine")) {
-                utterance.text = "I am also good, thankyou";
-                speechSynthesis.speak(utterance);
-                annyang.removeCallback('resultNoMatch')
-                break;
+    // annyang.addCallback('resultNoMatch', function (userSaid) {
+    //     for (var j = 0; j < userSaid.length; j++) {
+    //         if (userSaid[j].match("Alexa")) {
+    //             utterance.text = "Hey there, How are you?";
+    //             speechSynthesis.speak(utterance);
+    //             break;
+    //         }
+    //         else if (userSaid[j].match("I am good") || userSaid[j].match("I am fine")) {
+    //             utterance.text = "I am also good, thankyou";
+    //             speechSynthesis.speak(utterance);
+    //             annyang.removeCallback('resultNoMatch')
+    //             break;
+    //         }
+    //         else if (userSaid[j].match("I am good, How are you") || userSaid[j].match("I am fine, How are you")) {
+    //             utterance.text = "I am also good, thankyou";
+    //             speechSynthesis.speak(utterance);
+    //             annyang.removeCallback('resultNoMatch')
+    //             console.log("10 sec")
+    //             break;
 
-            }
-            else if (userSaid[j].match("I am good, How are you") || userSaid[j].match("I am fine, How are you")) {
-                utterance.text = "I am also good, thankyou";
-                speechSynthesis.speak(utterance);
-                annyang.removeCallback('resultNoMatch')
-                break;
+    //         }
+    //         else {
+    //             console.log("error")
+    //             break;
+    //         }
+    //     }
 
-            }
-            else {
-                console.log("error")
-                break;
-            }
-        }
+    // });
 
-    });
-
+    annyang.addCallback('isListening', function (data) {
+        console.log(data, "datas")
+    })
     annyang.addCallback('start', function (userSaid, commandText, phrases) {
-        // console.log("----S User : ",userSaid  )
-        // console.log("----S Command : ",commandText  )
-        // console.log("----S phrases : ",phrases  )
+        let word = "alexa" || "Alexa";
+        if (word == "alexa") { }
+        console.log("----S User : ", userSaid)
+        console.log("----S Command : ", commandText)
+        console.log("----S phrases : ", phrases)
     });
 }
 //Function for picking random answer on conversation

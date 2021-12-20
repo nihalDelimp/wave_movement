@@ -49,7 +49,12 @@ function loop(frequency) {
     mouseVelY = mouseY - lastMouseY;
     lastMouseX = mouseX;
     lastMouseY = mouseY;
-    makeParticle(frequency)
+    if(frequency>10){
+        makeParticle(frequency)
+    }
+    else{
+         makeParticle(0)
+    }
     ctx.fillStyle = "rgba(0,0,0,0.9)";
     ctx.fillRect(0, 0, screenW, screenH);
     for (var i = 0, len = particles.length; i < len; i++) {

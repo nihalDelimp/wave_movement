@@ -245,6 +245,10 @@ rename(commands, "Alexa ");
 if (annyang) {
     console.log(annyang)
     // Add our commands to annyang
+    let word="alexa"
+    if(word=="alexa"){
+        annyang.start()
+    }
     annyang.addCommands(commands);
     user_said();
     
