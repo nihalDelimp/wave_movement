@@ -1,7 +1,7 @@
 
-let utterance = new SpeechSynthesisUtterance();
 // function for making alberta speak //
 export const speak = (word) => {
+let utterance = new SpeechSynthesisUtterance();
     utterance.lang = "en-US"
     //const voicec = speechSynthesis.getVoices()
     //console.log( utterance,"voice")
