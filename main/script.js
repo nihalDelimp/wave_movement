@@ -17,18 +17,6 @@ var canvas = document.createElement('canvas'),
 
 particleImage.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAC0WlDQ1BJQ0MgcHJvZmlsZQAAOI2NlM9LFGEYx7+zjRgoQWBme4ihQ0ioTBZlROWuv9i0bVl/lBLE7Oy7u5Ozs9PM7JoiEV46ZtE9Kg8e+gM8eOiUl8LALALpblFEgpeS7Xlnxt0R7ccLM/N5nx/f53nf4X2BGlkxTT0kAXnDsZJ9Uen66JhU+xEhHEEdwqhTVNuMJBIDoMFjsWtsvofAvyute/v/OurStpoHhP1A6Eea2Sqw7xfZC1lqBBC5XsOEYzrE9zhbnv0x55TH8659KNlFvEh8QDUtHv+auEPNKWmgRiRuyQZiUgHO60XV7+cgPfXMGB6k73Hq6S6ze3wWZtJKdz9xG/HnNOvu4ZrE8xmtN0bcTM9axuod9lg4oTmxIY9DI4YeH/C5yUjFr/qaoulEk9v6dmmwZ9t+S7mcIA4TJ8cL/TymkXI7p3JD1zwW9KlcV9znd1Yxyeseo5g5U3f/F/UWeoVR6GDQYNDbgIQk+hBFK0xYKCBDHo0iNLIyN8YitjG+Z6SORIAl8q9TzrqbcxtFyuZZI4jGMdNSUZDkD/JXeVV+Ks/JX2bDxeaqZ8a6qanLD76TLq+8ret7/Z48fZXqRsirI0vWfGVNdqDTQHcZYzZcVeI12P34ZmCVLFCpFSlXadytVHJ9Nr0jgWp/2j2KXZpebKrWWhUXbqzUL03v2KvCrlWxyqp2zqtxwXwmHhVPijGxQzwHSbwkdooXxW6anRcHKhnDpKJhwlWyoVCWgUnymjv+mRcL76y5o6GPGczSVImf/4RVyGg6CxzRf7j/c/B7xaOxIvDCBg6frto2ku4dIjQuV23OFeDCN7oP3lZtzXQeDj0BFs6oRavkSwvCG4pmdxw+6SqYk5aWzTlSuyyflSJ0JTEpZqhtLZKi65LrsiWL2cwqsXQb7Mypdk+lnnal5lO5vEHnr/YRsPWwXP75rFzeek49rAEv9d/AvP1F2p6YVQAAAAlwSFlzAAALEgAACxIB0t1+/AAAAaBJREFUKJGNkj1uE1EYRc+b772ZN2M7doyCFAlBQYEihBSlhnUgUbIjtsEOWABLgIpIIZCAQCZ2NJkfv5+PghQBN9zu6p7uHmEnhcU6MGj+dzJ3y96E2mLBgEKEPnJ9s0OLY1nTCM4gUAg5kSAoXeJXTwoA9g+9rJlZKqEqrXXWWK9xiCGO2ygGan4GAAEWM2ZCLTRTX80Pyvl+2TTSzArrhaAhohjHsEWA/ZpaaGpbLe4388l04o+OH2vIyajiCF2KWaEdsa5CwArWe1uXk6Z6++6NSy9Uvr9++eosXFjv7dhKAiicUBhQjFQi8uTZ0ufnItby4OjkoYgYqVAKA1CkjAKgKeWYz89WXLxPKdJ+/fThc45ZU4JbxhjD4ZypMG1Kf++w2auXB+7pyaPTjz8uv1x31/2w+tZ22zZxuUYAZykFcpIiZXXDqOenV+urfmjH0K76m36baQP9FgtsRrzFKGxaH0Lsp0acphCHdujGMTIom/HOl03DosQXuAIxt88nJWSGzHpL1/3tiauYV1QGW2AMqsTMqGxGwrjr3n/kN+DwvQLQM6AaAAAAAElFTkSuQmCC';
 
-// var requestAnimFrame = function () {
-//         return window.requestAnimationFrame ||
-//         window.webkitRequestAnimationFrame ||
-//         window.mozRequestAnimationFrame ||
-//         window.oRequestAnimationFrame ||
-//         window.msRequestAnimationFrame ||
-//         function(callback) {
-//         window.setTimeout(callback, 1000 / 60);
-//     };
-// }();
-
-// Functions
 function init(frequency) {
     document.body.appendChild(canvas);
     canvas.width = screenW;
@@ -36,11 +24,6 @@ function init(frequency) {
     // executeLoop(); loop
      loop(frequency)
 }
-
-// function executeLoop() {
-//     loop(10);
-//     requestAnimFrame(executeLoop);
-// }
 
 function loop(frequency) {
     
