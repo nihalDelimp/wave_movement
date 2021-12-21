@@ -22,7 +22,10 @@ var requestAnimFrame = function () {
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame ||
         window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame 
+        window.msRequestAnimationFrame ||
+        function(callback) {
+        window.setTimeout(callback, 1000 / 60);
+    };
 
 }();
 
@@ -32,14 +35,13 @@ function init(frequency) {
     canvas.width = screenW;
     canvas.height = screenH;
     // executeLoop(); loop
-
-    requestAnimFrame(loop(frequency));
+  loop(frequency)
 }
 
-// function executeLoop() {
-//     loop();
-//     // requestAnimFrame(executeLoop);
-// }
+function executeLoop() {
+    loop(10);
+    requestAnimFrame(executeLoop);
+}
 
 function loop(frequency) {
     
