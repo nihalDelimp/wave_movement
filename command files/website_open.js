@@ -156,7 +156,13 @@ export const webopener = {
     },
     'search google for *tag': async (varia) => {
         try {
-            window.open(`https://www.google.com/search?q=${varia}`, 'popup', 'width=900,height=600')
+            if (varia == "neom pictures" || varia == "neon pictures") {
+                window.open("https://www.google.com/search?q=NEOM&rlz=1C5CHFA_enGB952GB952&source=lnms&tbm=isch&sa=X&ved=2ahUKEwismYPCien0AhUNhP0HHUTcDlAQ_AUoBHoECAEQBg&biw=1775&bih=1243&dpr=2");
+            }
+            else {
+                window.open(`https://www.google.com/search?q=${varia}`, 'popup', 'width=900,height=600')
+            }
+
             speak('searching google for ' + varia)
             display('searching google for ' + varia)
         } catch (error) {
@@ -177,7 +183,7 @@ export const webopener = {
             window.open(`https://www.google.com/maps/place/${varia}`, 'popup', 'width=900,height=600')
             speak('Locating ' + varia)
             display('Locating ' + varia)
-        } catch (error) {}
+        } catch (error) { }
     },
     'where is *tag': async (varia) => {
         try {
@@ -208,5 +214,180 @@ export const webopener = {
         } catch (error) {
             speak('something went wron try again')
         }
-    }
+    },
+    'what is the latest neom news': () => {
+        try {
+            speak('here is the latest news')
+            window.open(`https://www.neom.com/en-us/newsroom`, 'popup', 'width=900,height=600')
+        } catch (error) {
+            speak('something went wron try again')
+        }
+
+    },
+    'what is the latest neon news': () => {
+        try {
+            speak('here is the latest news')
+            window.open(`https://www.neom.com/en-us/newsroom`, 'popup', 'width=900,height=600')
+        } catch (error) {
+            speak('something went wron try again')
+        }
+
+    },
+    'whats the latest neon news': () => {
+        try {
+            speak('here is the latest news')
+            window.open(`https://www.neom.com/en-us/newsroom`, 'popup', 'width=900,height=600')
+        } catch (error) {
+            speak('something went wron try again')
+        }
+
+    },
+    'whats the latest neon news': () => {
+        try {
+            speak('here is the latest news')
+            window.open(`https://www.neom.com/en-us/newsroom`, 'popup', 'width=900,height=600')
+        } catch (error) {
+            speak('something went wron try again')
+        }
+
+    },
+    'play neom line video': () => {
+        try {
+            speak("Here result is :")
+            window.open("https://www.youtube.com/watch?v=TtSMz-_h_cw");
+        } catch (error) {
+            speak('something went wron try again')
+        }
+    },
+    'play neon line video': () => {
+        try {
+            speak("Here result is :")
+            window.open("https://www.youtube.com/watch?v=TtSMz-_h_cw");
+        } catch (error) {
+            speak('something went wron try again')
+        }
+    },
+    'what can i invest in saudi arabia': () => {
+        try {
+            speak("showing you the results")
+            window.open("https://neom.com");
+        }
+        catch (error) {
+            speak('something went wron try again')
+        }
+    },
+    'can i invest in property in neom': () => {
+        try {
+            speak("yes you can, showing you some results ")
+            window.open("https://neom.com");
+        }
+        catch (error) {
+            speak('something went wron try again')
+        }
+    },
+    'can i invest in property in neon': () => {
+        try {
+            speak("yes you can, showing you some results ")
+            window.open("https://neom.com");
+        }
+        catch (error) {
+            speak('something went wron try again')
+        }
+    },
+    'why is it attractive to invest in neom': () => {
+        try {
+            speak("Because its too good")
+        }
+        catch (error) {
+            speak('something went wron try again')
+        }
+    },
+    'why is it attractive to invest in neon': () => {
+        try {
+            speak("Because its too good")
+        }
+        catch (error) {
+            speak('something went wrong try again')
+        }
+    },
+    'add milk to my shopping list': () => {
+        try {
+            speak("sure thing done, anything else")
+
+        } catch (error) {
+            speak('something went wrong try again')
+        }
+    },
+    'whats my monthly balance': () => {
+        try {
+            speak("Your monthly balance is 9245.57 dollars ")
+        } catch (error) {
+            speak('something went wrong try again')
+        }
+    },
+    'order my favourite breakfast for eight': () => {
+        try {
+            speak("sure thing done")
+        } catch (error) {
+            speak('something went wrong try again')
+        }
+    },
+    'show me the latest job vacancies': () => {
+        try {
+            speak("sure, showing you the results")
+            window.open("https://neom.com/en-us/be-part-of-neom");
+        } catch (error) {
+            speak('something went wrong try again')
+
+        }
+    },
+    'tell me something good': () => {
+        try {
+            speak("you look great today")
+        } catch (error) {
+            speak('something went wrong try again')
+
+        }
+    },
+    'what is the latest sports news': () => {
+        try {
+            speak("opening latest sports news")
+            window.open("https://albiladdaily.com/category/%d8%b1%d9%8a%d8%a7%d8%b6%d8%a9/");
+        } catch (error) {
+            speak('something went wrong try again')
+
+        }
+    },
+    'take me to the newsroom': () => {
+        try {
+            speak( "yeah sure, taking you to the newsroom" )
+        window.open( "https://neom.com/en-us/newsroom " );
+        } catch (error) {
+            speak('something went wrong try again')
+        }
+    },
+    'how many people live in neom': () => {
+        try {
+            speak( "its around one million people" )
+        } catch (error) {
+            speak('something went wrong try again')
+        }
+    },
+    'how many people live in neon': () => {
+        try {
+            speak( "its around one million people" )
+        } catch (error) {
+            speak('something went wrong try again')
+        }
+    },
+    'i want to know more about oxygen': () => {
+        try {
+            speak( "here result is:" )
+            window.open( "https://www.neom.com/en-us/regions/oxagon" );
+        } catch (error) {
+            speak('something went wrong try again')
+        }
+        
+    },
+
 }

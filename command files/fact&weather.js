@@ -72,10 +72,23 @@ export const weather_fact = {
 
             })
     },
-    'what is *tag': (def) => {
-
-        var obj;
-        fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + def)
+    'what is the time': () => {
+        var dateWithouthSecond = new Date();
+        let tem = dateWithouthSecond.toLocaleTimeString(navigator.language, {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        speak('the time is ' + tem)
+        display('the time is ' + tem)
+    },
+    'whats *tag': (def) => {
+        if(def=="the latest neom news" || def=="the latest neon news"){
+            speak('here is neom news')
+            window.open(`https://www.neom.com/en-us/newsroom`, 'popup', 'width=900,height=600')
+        }
+        else{
+            var obj;
+            fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + def)
             .then(res => {
                 if (res.status == 200) {
                     return res.json()
@@ -84,9 +97,6 @@ export const weather_fact = {
                     setTimeout(() => {
                         window.open('https://www.google.com/search?q=' + def, "popup", '"width=900,height=600"');
                     }, 4000);
-
-
-
                 }
             })
             .then(data => obj = data[0].meanings[0].definitions[0].definition)
@@ -105,10 +115,7 @@ export const weather_fact = {
                 user_said()
 
             }).catch(err => setTimeout(() => console.clear()))
-
-
-
-
+        }
     },
     'definition of *tag': (def) => {
 
@@ -150,15 +157,6 @@ export const weather_fact = {
     },
     'what should i wear today': () => {
         wear()
-    },
-    'what time is it': () => {
-        var dateWithouthSecond = new Date();
-        let tem = dateWithouthSecond.toLocaleTimeString(navigator.language, {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        speak('the time is ' + tem)
-        display('the time is ' + tem)
     },
     'toss a coin': () => {
         let state = Math.floor(Math.random() * 2) == 0 ? 'heads' : 'tails'

@@ -9,7 +9,7 @@ let utterance = new SpeechSynthesisUtterance();
     //utterance.voice = voicec['2']
     //speechSynthesis.speak(utterance);
 
-    console.log(utterance, "voice")
+    // console.log(utterance, "voice")
     // loop(word.length*5)
     utterance.onstart = function (event) {
 
@@ -56,22 +56,12 @@ let utterance = new SpeechSynthesisUtterance();
 // function for displaying alberta's response on screen
 export const display = (word) => {
     console.log(word)
-    // document.getElementById('texp').innerHTML = '<img src="./UI/speaker.ico"/>' + word;
-    // setTimeout(function() {
-    //     document.getElementById('texp').innerHTML = '<img src="./UI/speaker.ico" />Try Some Commands <br> Example: Alberta What Time is it?';
-    // }, 10000);
 }
 // function for displaying user's's response on screen
 
 export const user_said = () => {
-    // if(user_said=="Alexa"){
-    //     console
-    //     annyang.addCallback('resultNoMatch')
-    // }
-
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-
-        // console.log("User : ", userSaid)
+        console.log("User : ", userSaid)
         //console.log("Command :",commandText)
         // document.getElementById('usersaid').innerHTML = '<img src="./UI/mic.ico"/>' + userSaid;
         // setTimeout(function() {
@@ -107,16 +97,19 @@ export const user_said = () => {
     //     }
 
     // });
+    // annyang.addCallback('start',(userSaid)=>{
+    //     console.log("nnihal",userSaid)
+    // })
 
     annyang.addCallback('isListening', function (data) {
         console.log(data, "datas")
     })
     annyang.addCallback('start', function (userSaid, commandText, phrases) {
-        let word = "alexa" || "Alexa";
-        if (word == "alexa") { }
-        console.log("----S User : ", userSaid)
-        console.log("----S Command : ", commandText)
-        console.log("----S phrases : ", phrases)
+        // let word = "alexa" || "Alexa";
+        // if (word == "alexa") { }
+        // console.log("----S User : ", userSaid)
+        // console.log("----S Command : ", commandText)
+        // console.log("----S phrases : ", phrases)
     });
 }
 //Function for picking random answer on conversation

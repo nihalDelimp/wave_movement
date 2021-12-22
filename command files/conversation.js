@@ -8,13 +8,13 @@ import {
 
 export const conversation = {
     'how are you': () => {
-        random('i am fine', 'i am always fine')
+        random('i am fine thank you', 'i am always fine thank you', 'i am good thank you')
     },
     'where do you live': () => {
         random('i live on a ssd server!', 'my home called server!')
     },
     'who developed you': () => {
-        random('I developed By Mr.Siyam Fahad and his team', "Team Siyam Fahad Developed me")
+        random('I developed By Delimp and its team', "Team Delimp Developed me")
     },
     '"do you love someone"': () => {
         random("No i don't because i do't have feelings", "No, Love is pain")
