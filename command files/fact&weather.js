@@ -31,7 +31,7 @@ export const weather_fact = {
 
         }
     },
-    'my ip address': () => {
+    'whats my ip address': () => {
         var obj;
         try {
             fetch('https://api.ipify.org/?format=json')

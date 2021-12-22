@@ -325,7 +325,7 @@ export const webopener = {
             speak('something went wrong try again')
         }
     },
-    'order my favourite breakfast for eight': () => {
+    'order my favourite breakfast for morning eight': () => {
         try {
             speak("sure thing done")
         } catch (error) {
@@ -333,6 +333,15 @@ export const webopener = {
         }
     },
     'show me the latest job vacancies': () => {
+        try {
+            speak("sure, showing you the results")
+            window.open("https://neom.com/en-us/be-part-of-neom");
+        } catch (error) {
+            speak('something went wrong try again')
+
+        }
+    },
+    'show me the latest job vacancy': () => {
         try {
             speak("sure, showing you the results")
             window.open("https://neom.com/en-us/be-part-of-neom");
