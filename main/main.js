@@ -216,24 +216,32 @@ export const commands = { ...control,
 // console.log(commands)
 
 //wake word function to add wake word on every commands
-var rename = function(obj, prefix) {
+export const newfunction=(obj) =>{
+    // console.log("prefix", prefix)
+    console.log("object", obj)
+    let  prefix = "line " || 'lime ' ||'lyme '||'line ' || 'lying '||'Alexa ';
+
     if (typeof obj !== 'object' || !obj) {
         return false;
     }
     var keys = Object.keys(obj),
-        keysLen = keys.length,
-        prefix = prefix || '';
-    for (var i = 0; i < keysLen; i++) {
-        obj[prefix + keys[i]] = obj[keys[i]];
-        if (typeof obj[keys[i]] === 'object') {
-            rename(obj[prefix + keys[i]], prefix);
-        }
-        delete obj[keys[i]];
-    }
+        keysLen = keys.length
+        // if(){
+            for (var i = 0; i < keysLen; i++) {
+                obj[prefix + keys[i]] = obj[keys[i]];
+                if (typeof obj[keys[i]] === 'object') {
+                    newfunction(obj[prefix + keys[i]]);
+                }
+                delete obj[keys[i]];
+            }
+        // }
     return obj;
 };
 // for changing wake word remove "Alberta" and add whatever you want E.G.-"alexa"
-rename(commands, "Line ");
+
+// rename(commands, {prefix: "lime", bar: "works!"}'lime ' ||'lyme '||'line ' || 'lying '||'Alexa ');
+// rename(commands, "How ");
+// rename(commands, "how ");
 
 
 //var size = Object.keys(commands).length;

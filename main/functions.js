@@ -1,8 +1,41 @@
 
 // function for making alberta speak //
 export const speak = (word) => {
-let utterance = new SpeechSynthesisUtterance();
+    let newWord = word
+    const newBody = {
+        "audioConfig": {
+            "audioEncoding": "LINEAR16",
+            "pitch": 0,
+            "speakingRate": 1
+        },
+        "input": {
+            "text": word
+        },
+        "voice": {
+            "languageCode": "en-US",
+            "name": "en-US-Wavenet-F"
+        }
+    }
+    fetch('https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=AIzaSyD341VcHBuNtTVDRBoSn78zX-ZNsUdBWxE', { method: 'POST', body: JSON.stringify(newBody) }
+    ).then(data => data.json()
+    ).then(res => {
+        console.log(typeof(res.audioContent))
+//         var audio = new Audio(res.audioContent);
+// var sound = new Howl({
+//     src: [word],
+//     volume: 1.0,
+//     onend: function () {
+//       alert('We finished with the setup!');
+//     }
+//   });
+//   sound.play()
+var audio = document.getElementById('audio');
+audio.src = `data:audio/mp3;base64,${res.audioContent}`;
+    })
+    let utterance = new SpeechSynthesisUtterance();
+    console.log(utterance, "utterance")
     utterance.lang = "en-US"
+    // utterance.voice = "en-US-Wavenet-F"
     //const voicec = speechSynthesis.getVoices()
     //console.log( utterance,"voice")
     //change the number for voice changing
@@ -21,8 +54,6 @@ let utterance = new SpeechSynthesisUtterance();
             //console.log("W W :",worddata.length,worddata[startjob])
             startjob++;
             if (startjob >= worddata.length) clearInterval(intervaldt);
-
-
         }, 150)
 
 
@@ -49,7 +80,7 @@ let utterance = new SpeechSynthesisUtterance();
     }
 
     utterance.text = word;
-    speechSynthesis.speak(utterance);
+    // speechSynthesis.speak(utterance);
 
 
 }
@@ -69,34 +100,35 @@ export const user_said = () => {
         // }, 10000)
     });
 
-    // annyang.addCallback('resultNoMatch', function (userSaid) {
-    //     for (var j = 0; j < userSaid.length; j++) {
-    //         if (userSaid[j].match("Alexa")) {
-    //             utterance.text = "Hey there, How are you?";
-    //             speechSynthesis.speak(utterance);
-    //             break;
-    //         }
-    //         else if (userSaid[j].match("I am good") || userSaid[j].match("I am fine")) {
-    //             utterance.text = "I am also good, thankyou";
-    //             speechSynthesis.speak(utterance);
-    //             annyang.removeCallback('resultNoMatch')
-    //             break;
-    //         }
-    //         else if (userSaid[j].match("I am good, How are you") || userSaid[j].match("I am fine, How are you")) {
-    //             utterance.text = "I am also good, thankyou";
-    //             speechSynthesis.speak(utterance);
-    //             annyang.removeCallback('resultNoMatch')
-    //             console.log("10 sec")
-    //             break;
+    annyang.addCallback('resultNoMatch', function (userSaid) {
+        console.log(userSaid,"Nihal")
+        // for (var j = 0; j < userSaid.length; j++) {
+        //     if (userSaid[j].match("Alexa")) {
+        //         utterance.text = "Hey there, How are you?";
+        //         speechSynthesis.speak(utterance);
+        //         break;
+        //     }
+        //     else if (userSaid[j].match("I am good") || userSaid[j].match("I am fine")) {
+        //         utterance.text = "I am also good, thankyou";
+        //         speechSynthesis.speak(utterance);
+        //         annyang.removeCallback('resultNoMatch')
+        //         break;
+        //     }
+        //     else if (userSaid[j].match("I am good, How are you") || userSaid[j].match("I am fine, How are you")) {
+        //         utterance.text = "I am also good, thankyou";
+        //         speechSynthesis.speak(utterance);
+        //         annyang.removeCallback('resultNoMatch')
+        //         console.log("10 sec")
+        //         break;
 
-    //         }
-    //         else {
-    //             console.log("error")
-    //             break;
-    //         }
-    //     }
+        //     }
+        //     else {
+        //         console.log("error")
+        //         break;
+        //     }
+        // }
 
-    // });
+    });
     // annyang.addCallback('start',(userSaid)=>{
     //     console.log("nnihal",userSaid)
     // })
