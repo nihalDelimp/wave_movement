@@ -1,6 +1,5 @@
-navigator.mediaDevices.getUserMedia( {
-    audio: true
-} ).then( function ( stream ) {
+var filter, compressor, mediaStreamSource;
+navigator.mediaDevices.getUserMedia( { audio: true }, initAudio ).then( function ( stream ) {
     audioContext = new AudioContext();
     analyser = audioContext.createAnalyser();
     microphone = audioContext.createMediaStreamSource( stream );
@@ -23,14 +22,41 @@ navigator.mediaDevices.getUserMedia( {
         }
 
         var average = values / length;
+        annyang.start();
+
         render( average )
-        console.log( average, "average" )
     }
 } ).catch( err => {
     const average = 0.1;
     render( average )
 }
 )
+
+function initAudio ( stream ) {
+    compressor = audioContext.createDynamicsCompressor();
+    compressor.threshold.value = -50;
+    compressor.knee.value = 40;
+    compressor.ratio.value = 12;
+    compressor.reduction.value = -20;
+    compressor.attack.value = 0;
+    compressor.release.value = 0.25;
+
+    filter = audioContext.createBiquadFilter();
+    filter.Q.value = 8.30;
+    filter.type = filter.LOWPASS;
+    filter.frequency.value = 255;
+    filter.gain.value = 3.0;
+    // filter.type = 'bandpass';
+    filter.connect( compressor );
+
+
+    compressor.connect( context.destination )
+    filter.connect( context.destination )
+
+    mediaStreamSource = context.createMediaStreamSource( stream );
+    mediaStreamSource.connect( filter );
+}
+
 
 var SEPARATION = 40, AMOUNTX = 130, AMOUNTY = 35;
 
@@ -76,7 +102,7 @@ function init () {
 
 
     const material = new THREE.SpriteMaterial( {
-        color: "black", //changes color of particles
+        color: "#fceb59", //changes color of particles
         program: function ( context ) {
 
             context.beginPath();
@@ -104,7 +130,7 @@ function init () {
     // renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.setClearColor( 0xffffff, 1 );
+    renderer.setClearColor( "black", 1 );
     container.appendChild( renderer.domElement );
 
     window.addEventListener( 'resize', onWindowResize, false );
@@ -140,26 +166,24 @@ function render ( frequency ) {
             // particle.position.y = ( Math.sin( ( ix + count ) * 0.5 ) * 20 ) + ( Math.sin( ( iy + count ) * 0.5 ) * 20 );
             // particle.scale.x = particle.scale.y = ( Math.sin( ( ix + count ) * 0.3 ) + 2 ) * 4 + ( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 4;
             particle.position.y = ( Math.sin( ( ix + count ) * 0.5 ) * 10 ) + ( Math.sin( ( iy + count ) * 0.5 ) * 20 );
-            particle.scale.x = particle.scale.y = ( Math.sin( ( ix + count ) * 0.4 ) + 1 ) * 1 + ( Math.sin( ( iy + count ) * 0.1 ) + 3 ) * 1;
+            particle.scale.x = particle.scale.y = ( Math.sin( ( ix + count ) * 0.3 ) + 2 ) * 1 + ( Math.sin( ( iy + count ) * 0.5 ) + 2 ) * 1;
         }
 
     }
 
     renderer.render( scene, camera );
-
-    if ( frequency < 2 ) {
+    // This increases 0or decreases speed
+    //count += 0.2;
+    if ( frequency === 0 ) {
         count += 0;
     }
-    else if ( frequency > 5 && frequency <= 20 ) {
+    else if ( frequency >= 10 && frequency <= 40 ) {
         count += 0.3;
-    } else if ( frequency > 20 && frequency <= 50 ) {
-        count += 0.6;
-    }
-    else if ( frequency > 50 && frequency <= 80 ) {
+    } else if ( frequency >= 40 && frequency <= 80 ) {
         count += 0.9;
     }
     else {
-        count += 0.5;
+        count += 0;
 
     }
 
